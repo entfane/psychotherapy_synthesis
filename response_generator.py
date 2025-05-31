@@ -1,3 +1,4 @@
+import time
 from openai import OpenAI
 from google import genai
 from google.genai import types
@@ -20,11 +21,18 @@ class ResponseGenerator:
         return response.output_text
     
     def generate_gemini_response(self, system_prompt, user_prompt):
-        response = self.gemini_client.models.generate_content(
-            model="gemini-2.0-flash-001",
-            contents=user_prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-            ),
-        )
-        return response.text
+        delay = 2
+        while True:
+            try:
+                response = self.gemini_client.models.generate_content(
+                    model="gemini-2.0-flash-001",
+                    contents=user_prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_prompt,
+                    ),
+                )
+                return response.text
+            except Exception as e:
+                time.sleep(delay)
+                print("Retry")
+                delay *= 2
