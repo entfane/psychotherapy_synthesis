@@ -4,7 +4,7 @@ from utils import txt_to_list
 import pandas as pd
 
 SCENARIOS_PATH = 'scenarios.txt'
-NUMBER_OF_PROMPTS_PER_SCENARIO = 3
+NUMBER_OF_PROMPTS_PER_SCENARIO = 5
 MAX_EMOTIONAL_DESCRIPTIONS_PER_PROMPT = 3
 PRINT_INTERVAL = 10
 
