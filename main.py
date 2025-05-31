@@ -19,13 +19,13 @@ if __name__ == "__main__":
         prompts = []
         for prompt_num in range(NUMBER_OF_PROMPTS_PER_SCENARIO):
             input_user_prompt = PROMPT_GENERATION_USER_PROMPT.format(scenario=scenario, mentioned="\n".join(prompts))
-            prompt = LLM.generate_response(PROMPT_GENERATION_SYSTEM_PROMPT, input_user_prompt)
+            prompt = LLM.generate_gemini_response(PROMPT_GENERATION_SYSTEM_PROMPT, input_user_prompt)
             prompts.append(prompt)
             emotional_descriptions = []
             for emotion_num in range(MAX_EMOTIONAL_DESCRIPTIONS_PER_PROMPT):
                 emotion_description_user_prompt = EMOTIONAL_DESCRIPTION_USER_PROMPT.format(input = prompt,
                                                                                             mentioned="\n".join(emotional_descriptions))
-                emotional_description = LLM.generate_response(EMOTIONAL_DESCRIPTION_SYSTEM_PROMPT, emotion_description_user_prompt)
+                emotional_description = LLM.generate_gemini_response(EMOTIONAL_DESCRIPTION_SYSTEM_PROMPT, emotion_description_user_prompt)
                 emotional_descriptions.append(emotional_description)
                 new_record = {
                     "prompt": prompt,
